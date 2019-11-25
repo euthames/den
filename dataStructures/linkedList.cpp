@@ -63,6 +63,32 @@ int addNodeSequentialy(node **root_ptr, int val){
 
 }
 
+int deleteNode(node **root_ptr,int val){
+	if(*root_ptr == NULL) // Empty linked list
+		return 0;
+
+	if((*root_ptr)->data == val){ // Delete first node
+		node * temp = *root_ptr;
+		*root_ptr = (*root_ptr)->next;
+		free(temp);
+		return 0;
+	}
+
+	node * iter = *root_ptr;
+	while(iter->next != NULL && iter -> next -> data != val)
+		iter = iter -> next;
+
+	if(iter -> next == NULL){ // Couldn't find val that will be deleted in the list
+		printf("Couldn't find val in list");
+		return 1;
+	}
+	// Delete node at middle or the end
+	node * temp = iter -> next;
+	iter -> next = temp -> next;
+	free(temp);	
+	return 0;
+}
+
 int main(){
 	node* root = NULL;
 
@@ -72,8 +98,21 @@ int main(){
 	addNodeSequentialy(&root,450);
 	addNodeSequentialy(&root,50);
 	addNodeSequentialy(&root,50);
-
 	printLinkedList(root);
+
+	deleteNode(&root,50);
+	printLinkedList(root);
+	deleteNode(&root,4);
+	printLinkedList(root);
+	deleteNode(&root,40);
+	printLinkedList(root);
+	deleteNode(&root,450);
+	printLinkedList(root);
+	deleteNode(&root,400);
+	printLinkedList(root);
+	deleteNode(&root,50);
+	printLinkedList(root);
+	
 
 	return 0;
 }
