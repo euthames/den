@@ -33,27 +33,45 @@ int addNodeToBegining(node ** r_ptr, int val){
 	return 0;
 }
 
-int addNodeToEnd(node * iter, int val){
-	if(iter == NULL)
-		return 1;
-	while(iter -> next != NULL)
-		iter = iter -> next;
+int addNodeToInterval(node ** r_ptr, int val){
+	if(*r_ptr==NULL){
+		*r_ptr = (node*)malloc(sizeof(node));
+		(*r_ptr) -> next = NULL;
+		(*r_ptr) -> data = val;
+		return 0;
+	}
 
-	iter -> next = (node *)malloc(sizeof(node));
-	iter -> next -> data = val;
-	iter -> next -> next = NULL;
+	node * iter = (*r_ptr);
+	while(iter -> next != NULL && iter -> next -> data < val)
+		iter = iter -> next;	
+		
+	node * temp = (node*)malloc(sizeof(node));
+	temp -> next = iter -> next;
+	temp -> data = val;
+	iter -> next = temp;	
 
 	return 0;
+}
+
+int addNodeSequentialy(node **root_ptr, int val){
+	if(*root_ptr==NULL)
+		return addNodeToBegining(root_ptr,val); // or addNodeToInterval(root_ptr,val);
+	else if((*root_ptr) -> data > val)
+		return addNodeToBegining(root_ptr,val);
+	else
+		return addNodeToInterval(root_ptr,val);
+
 }
 
 int main(){
 	node* root = NULL;
 
-	for(int i=1;i<=10;i++)
-		addNodeToBegining(&root,i*100);
-
-	for(int i=1;i<=10;i++)
-		addNodeToEnd(root,i*10);
+	addNodeSequentialy(&root,400);
+	addNodeSequentialy(&root,40);
+	addNodeSequentialy(&root,4);
+	addNodeSequentialy(&root,450);
+	addNodeSequentialy(&root,50);
+	addNodeSequentialy(&root,50);
 
 	printLinkedList(root);
 
