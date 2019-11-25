@@ -79,7 +79,7 @@ int deleteNode(node **root_ptr,int val){
 		iter = iter -> next;
 
 	if(iter -> next == NULL){ // Couldn't find val that will be deleted in the list
-		printf("Couldn't find val in list");
+		printf("Couldn't find val in list\n");
 		return 1;
 	}
 	// Delete node at middle or the end
@@ -102,9 +102,9 @@ int main(){
 
 	deleteNode(&root,50);
 	printLinkedList(root);
-	deleteNode(&root,4);
+	deleteNode(&root,999);
 	printLinkedList(root);
-	deleteNode(&root,40);
+	deleteNode(&root,4);
 	printLinkedList(root);
 	deleteNode(&root,450);
 	printLinkedList(root);
@@ -112,8 +112,14 @@ int main(){
 	printLinkedList(root);
 	deleteNode(&root,50);
 	printLinkedList(root);
+	deleteNode(&root,40);
+	printLinkedList(root);
+	deleteNode(&root,40);
+	printLinkedList(root);
+	deleteNode(&root,40);
+	printLinkedList(root);
 	
-
+	
 	return 0;
 }
 
