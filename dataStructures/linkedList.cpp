@@ -1,12 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-struct n{
-	int data;
-	n* next;
-};
-
-typedef n node;
+#include "linkedlist.h"
 
 // print given linked list 
 void printLinkedList(node * r){
@@ -86,40 +80,6 @@ int deleteNode(node **root_ptr,int val){
 	node * temp = iter -> next;
 	iter -> next = temp -> next;
 	free(temp);	
-	return 0;
-}
-
-int main(){
-	node* root = NULL;
-
-	addNodeSequentialy(&root,400);
-	addNodeSequentialy(&root,40);
-	addNodeSequentialy(&root,4);
-	addNodeSequentialy(&root,450);
-	addNodeSequentialy(&root,50);
-	addNodeSequentialy(&root,50);
-	printLinkedList(root);
-
-	deleteNode(&root,50);
-	printLinkedList(root);
-	deleteNode(&root,999);
-	printLinkedList(root);
-	deleteNode(&root,4);
-	printLinkedList(root);
-	deleteNode(&root,450);
-	printLinkedList(root);
-	deleteNode(&root,400);
-	printLinkedList(root);
-	deleteNode(&root,50);
-	printLinkedList(root);
-	deleteNode(&root,40);
-	printLinkedList(root);
-	deleteNode(&root,40);
-	printLinkedList(root);
-	deleteNode(&root,40);
-	printLinkedList(root);
-	
-	
 	return 0;
 }
 
